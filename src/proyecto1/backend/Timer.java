@@ -9,6 +9,6 @@ package proyecto1.backend;
  *
  * @author gamcas
  */
-public class ProbandoGit {
+public class Timer {
     
 }

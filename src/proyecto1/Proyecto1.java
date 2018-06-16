@@ -5,6 +5,7 @@
  */
 package proyecto1;
 
+import proyecto1.backend.Auxiliar;
 import proyecto1.ui.Interfaz;
 
 /**
@@ -19,6 +20,9 @@ public class Proyecto1 {
     public static void main(String[] args) {
         Interfaz interfaz = new Interfaz();
         interfaz.setVisible(true);
+        
+        System.out.println(Auxiliar.numMovimientos());
     }
+    
     
 }

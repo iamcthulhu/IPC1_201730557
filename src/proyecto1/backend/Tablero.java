@@ -1,59 +1,93 @@
 package proyecto1.backend;
 
-import java.awt.GridLayout;
-import static java.lang.Integer.parseInt;
-import javax.swing.JButton;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import javax.swing.BorderFactory;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-public class Tablero  {
+public class Tablero {
 
-    JButton[][] bMatriz;
-    JPanel panel;
-    JLabel texto;
-    
-    public Tablero(){
-    
-  
-    }
-    
+    public int size = 0;
+    public JPanel fondo = null;
 
-    public int sizematriz() {
+    public int[][] matrizLogica;
+    public JLabel[][] matrizGrafica;
 
-        int size = parseInt(JOptionPane.showInputDialog(null,
-                "ingrese tamanyo",JOptionPane.QUESTION_MESSAGE));
+    public int sizeBloqueY;
+    public Auxiliar personaje;
 
-        return size;
+    public Tablero(int size, JPanel panel) {
+        this.size = size;
+        this.fondo = panel;
+        llenarBombas();
     }
 
-    public JPanel getPanel() {
+    public Tablero() {
+    }
 
-        int size = sizematriz();
-        panel = new JPanel();
-        bMatriz = new JButton[size][size];
+    public void llenarBombas() {
+        sizeBloqueY = 600 / size;
+        matrizLogica = new int[size][size];
+        matrizGrafica = new JLabel[size][size];
 
-        panel.setBounds(100, 100, 300, 300);
-        int numrandom = (int) (Math.random() * 10);
-        panel.setLayout(new GridLayout(size, size));
+        //bombas 1, casillas vacias 0
+        matrizLogica[0][0] = 1;
+        personaje = new Auxiliar();
+        personaje.posicionPersonaje = 0;
 
-        for (int i = 0; i < size; i++) {
-            for (int j = 0; j < size; j++) {
-                bMatriz[i][j] = new JButton(String.valueOf(numrandom));
-                panel.add(bMatriz[i][j]);
+        for (int i = 1; i < size; i++) {
+            for (int j = 1; j < size; j++) {
+
+                matrizLogica[i][j] = 0;
             }
 
         }
-        return this.panel;
+
+        repintar();
     }
 
-    public JLabel getTexto() {
+    public void repintar() {
 
-        texto = new JLabel("Matriz");
-        texto.setBounds(10, 10, 70, 70);
+        JLabel casilla = null;
 
-        return texto;
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+
+                //0 casilla vacia
+                switch (matrizLogica[i][j]) {
+                    case 0:
+                        casilla = new JLabel();
+                        //si es uno
+                        break;
+                    case 1:
+                        casilla = new JLabel(this.personaje.obtenerImagen(sizeBloqueY, "/Imagen/mago.png"));
+                        break;
+                    case 2:
+                        break;
+                    default:
+                        break;
+                }
+
+                casilla.setOpaque(false);
+                casilla.setBorder(BorderFactory.createLineBorder(new Color(0, 0, 0)));
+                casilla.setBounds(j * sizeBloqueY, i * sizeBloqueY, sizeBloqueY, sizeBloqueY);
+
+                matrizGrafica[i][j] = casilla;
+                fondo.add(matrizGrafica[i][j], BorderLayout.CENTER);
+                fondo.repaint();
+            }
+
+        }
+
     }
 
+    public int validar(int numero) throws Exception {
 
+        if (numero > 18 || numero < 8) {
+            throw new Exception("Introduzca un numero correcto");
+        } else {
+            return numero;
+        }
+    }
 }
