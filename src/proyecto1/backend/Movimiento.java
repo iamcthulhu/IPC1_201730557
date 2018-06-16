@@ -46,8 +46,8 @@ public class Movimiento extends Thread{
         }
         if(comprobarfin()){
             cantidad=0;
-            tablero.matrizLogica[tablero.size-1][tablero.size-1]=0;
-            tablero.matrizGrafica[tablero.size-1][tablero.size-1].setIcon(null);
+            tablero.matrizLogica[tablero.size-1][0]=0;
+            tablero.matrizGrafica[tablero.size-1][0].setIcon(null);
             tablero.personaje.posicionPersonaje=0;
             tablero.matrizLogica[0][0]=1;
             tablero.repintar();
@@ -56,11 +56,11 @@ public class Movimiento extends Thread{
         else{
             try {
                 //mover una posicion
-                tablero.matrizLogica[tablero.personaje.posicionPersonaje][tablero.personaje.posicionPersonaje]=0;
-                tablero.matrizGrafica[tablero.personaje.posicionPersonaje][tablero.personaje.posicionPersonaje].setIcon(null);
+                tablero.matrizLogica[tablero.personaje.posicionPersonaje][0]=0;
+                tablero.matrizGrafica[tablero.personaje.posicionPersonaje][0].setIcon(null);
                 tablero.repintar();
                 tablero.personaje.posicionPersonaje+=1;
-                tablero.matrizLogica[tablero.personaje.posicionPersonaje][tablero.personaje.posicionPersonaje]=1;
+                tablero.matrizLogica[tablero.personaje.posicionPersonaje][0]=1;
                 tablero.repintar();
                 cantidad--;
                 Thread.sleep(500);
@@ -81,18 +81,18 @@ public class Movimiento extends Thread{
             tablero.matrizLogica[0][0]=0;
             tablero.matrizGrafica[0][0].setIcon(null);
             tablero.personaje.posicionPersonaje=0;
-            tablero.matrizLogica[tablero.size-1][tablero.size-1]=1;
+            tablero.matrizLogica[tablero.size-1][0]=1;
             tablero.repintar();
             return;
         }
         else{
             try {
                 //mover una posicion
-                tablero.matrizLogica[tablero.personaje.posicionPersonaje][tablero.personaje.posicionPersonaje]=0;
-                tablero.matrizGrafica[tablero.personaje.posicionPersonaje][tablero.personaje.posicionPersonaje].setIcon(null);
+                tablero.matrizLogica[tablero.personaje.posicionPersonaje][0]=0;
+                tablero.matrizGrafica[tablero.personaje.posicionPersonaje][0].setIcon(null);
                 tablero.repintar();
-                tablero.personaje.posicionPersonaje+=1;
-                tablero.matrizLogica[tablero.personaje.posicionPersonaje][tablero.personaje.posicionPersonaje]=1;
+                tablero.personaje.posicionPersonaje--;
+                tablero.matrizLogica[tablero.personaje.posicionPersonaje][0]=1;
                 tablero.repintar();
                 cantidad--;
                 Thread.sleep(500);
@@ -105,15 +105,20 @@ public class Movimiento extends Thread{
     }
     
     public void run(){
-        String moverAbajo="Abajo";
-        String moverArriba="Arriba";
-        if(Interfaz.botonPulsado.equals(moverAbajo)){
-            moverAbajo(cantidad);
+      
+        
+        switch (Interfaz.botonPulsado) {
+            case "Abajo":
+                moverAbajo(cantidad);
+                break;       
+            case "Arriba":
+                moverArriba(cantidad);
+                break;
+            case "Izquierda":
+              //  moverIzquierda(cantidad);
+                break;
+            default:
+                break;
         }
-        else if(Interfaz.botonPulsado.equals(moverArriba)){
-            moverArriba(cantidad);
-        }
-        //moverAbajo(cantidad);
-        //moverArriba(cantidad);        
     }
 }

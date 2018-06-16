@@ -12,10 +12,9 @@ import javax.swing.ImageIcon;
  *
  * @author gamcas
  */
-public class Auxiliar {
-
-    int posicionPersonaje;
-
+public class Bomba {
+    
+    
     public ImageIcon obtenerImagen(int sizeY, String path) {
 
         ImageIcon personaje = new ImageIcon(getClass().getResource(path));
@@ -27,12 +26,4 @@ public class Auxiliar {
         return personaje;
 
     }
-
-    public static int numMovimientos() {
-        int numMovimientos;
-        numMovimientos = (int) ((Math.random() * 6)+1);
-
-        return numMovimientos;
-    }
-
 }
