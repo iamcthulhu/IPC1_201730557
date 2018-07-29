@@ -15,6 +15,7 @@ public class Practica1 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        System.out.println("puto el que lo lea");
         // TODO code application logic here
     }
     
