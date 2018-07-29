@@ -16,7 +16,7 @@ public class Practica1 {
      */
     public static void main(String[] args) {
         System.out.println("puto el que lo lea");
-        // TODO code application logic here
+        // TODO code application logic herejhikhih ikhkjh kjh 
     }
     
 }
